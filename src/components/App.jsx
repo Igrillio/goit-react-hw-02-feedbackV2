@@ -1,5 +1,4 @@
 import { Component } from 'react';
-
 import Feedback from './Feedback/Feedback';
 
 class App extends Component {
@@ -9,17 +8,16 @@ class App extends Component {
     bad: 0,
   };
 
-  TotalFeedbackValue() {
+  countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
     return good + neutral + bad;
-  }
+  };
 
-  PositiveFeedbackValue = () => {
-    const total = this.TotalFeedbackValue();
+  countPositiveFeedbackPercentage = () => {
+    const total = this.countTotalFeedback();
     if (!total) {
       return 0;
     }
-
     const { good } = this.state;
     const result = Math.round((good / total) * 100);
 
@@ -36,14 +34,19 @@ class App extends Component {
   };
 
   render() {
-    const { state, TotalFeedbackValue, PositiveFeedbackValue, leaveVote } =
-      this;
+    const {
+      state,
+      countTotalFeedback,
+      countPositiveFeedbackPercentage,
+      leaveVote,
+    } = this;
+
     return (
       <div>
         <Feedback
           state={state}
-          TotalFeedbackValue={TotalFeedbackValue}
-          PositiveFeedbackValue={PositiveFeedbackValue}
+          countTotalFeedback={countTotalFeedback}
+          countPositiveFeedbackPercentage={countPositiveFeedbackPercentage}
           leaveVote={leaveVote}
         />
       </div>

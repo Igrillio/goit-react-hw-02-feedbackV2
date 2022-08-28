@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-import Options from './Options/Options';
 import Section from './Section/Section';
-import Statistics from './Statistics/Statistics';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Notification from './Notification/Notification';
+import Statistics from './Statistics/Statistics';
 
-import s from './Feedback.module.css';
+import s from './feedback.module.css';
 
 const Feedback = ({
   state,
@@ -14,13 +14,18 @@ const Feedback = ({
   leaveVote,
 }) => {
   const { good, neutral, bad } = state;
-  const total = countTotalFeedback()();
+
+  const total = countTotalFeedback();
+
   const positive = countPositiveFeedbackPercentage();
 
   return (
     <div className={s.feedback}>
       <Section title="Please leave feedback">
-        <Options options={Object.keys(state)} onLeaveFeedback={leaveVote} />
+        <FeedbackOptions
+          options={Object.keys(state)}
+          onLeaveFeedback={leaveVote}
+        />
       </Section>
 
       <Section title="Statistics">
